@@ -11,13 +11,16 @@ import { JssProvider } from "react-jss";
 import "antd/dist/antd.css";
 
 import App from "./views/App";
+import { StoreProvider } from "./components/Store";
 
 const jss = createJss();
 jss.use(vendorPrefixer(), camelCase(), globalStyles());
 
 ReactDOM.render(
-  <JssProvider jss={jss}>
-    <App />
-  </JssProvider>,
+  <StoreProvider>
+    <JssProvider jss={jss}>
+      <App />
+    </JssProvider>
+  </StoreProvider>,
   document.getElementById("root")
 );

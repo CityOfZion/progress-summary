@@ -2,49 +2,75 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 
-import Button from "antd/lib/button";
-import Message from "antd/lib/message";
-import Header from "../../components/Header";
+import { Layout, Menu } from "antd";
+import Project from "../../components/Project";
+import { injectStore } from "../../components/Store";
 
-const styles = {
-  "@import": "https://fonts.googleapis.com/css?family=Source+Sans+Pro",
-  "@global html, body": {
-    fontFamily: "Source Sans Pro",
-    margin: 0,
-    padding: 0
-  },
-  App: {
-    textAlign: "center"
-  },
-  intro: {
-    fontSize: "large"
-  }
+import NEOLOGO from "../../assets/logo.png";
+import styles from "./styles";
+
+const { Content, Footer, Sider } = Layout;
+
+const projects = [
+  "neo-project",
+  "neo-ngd",
+  "CityOfZion",
+  "NewEconoLab",
+  "NeoResearch"
+];
+
+const renderFooter = classes => (
+  <Footer className={classes.footer}>
+    ©2018 Created by Jeroen Peeters for NGD
+  </Footer>
+);
+
+const renderProjects = store =>
+  projects.map((p, index) => (
+    <Menu.Item key={`${index.toString()}`} onClick={() => store.project.set(p)}>
+      {p}
+    </Menu.Item>
+  ));
+
+const renderSider = ({ classes, store }) => (
+  <Sider className={classes.sider}>
+    <div className={classes.logo}>
+      <img
+        className={classes.logoImg}
+        src={NEOLOGO}
+        alt="NEO logo"
+        key="NEOLOGO"
+      />
+    </div>
+    <Menu defaultSelectedKeys={["0"]} mode="inline">
+      {renderProjects(store)}
+    </Menu>
+  </Sider>
+);
+
+renderSider.propTypes = {
+  classes: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
 };
 
-class App extends React.Component {
-  handleClick = () => {
-    Message.info("You clicked the button!");
-  };
-
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.App}>
-        <Header title="A React boilerplate, with Parcel!" />
-        <p className={classes.intro}>
-          To get started, edit <code>src/views/App/index.js</code> and save to
-          reload.
-        </p>
-        <Button type="primary" onClick={this.handleClick}>
-          Or click this button!
-        </Button>
-      </div>
-    );
-  }
-}
+const App = ({ classes, store }) => {
+  const currentProject = store.project.get();
+  return (
+    <Layout className={classes.layout}>
+      {renderSider({ classes, store })}
+      <Layout>
+        <Content style={{ margin: "16px" }}>
+          {currentProject && <Project />}
+        </Content>
+        {renderFooter(classes)}
+      </Layout>
+    </Layout>
+  );
+};
 
 App.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
 };
 
-export default injectSheet(styles)(App);
+export default injectSheet(styles)(injectStore(App));
