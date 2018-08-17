@@ -24,12 +24,12 @@ class StoreProvider extends React.Component {
       project: {
         get: () => this.state.get("project"),
         set: value => this.state.set("project", value),
-        value: "neo-project"
+        value: ""
       },
       repos: {
         get: () => this.state.get("repos"),
         set: value => this.state.set("repos", value),
-        value: "neo-project"
+        value: {}
       }
     };
   }

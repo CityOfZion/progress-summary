@@ -54,13 +54,12 @@ renderSider.propTypes = {
 };
 
 const App = ({ classes, store }) => {
-  const currentProject = store.project.get();
   return (
     <Layout className={classes.layout}>
       {renderSider({ classes, store })}
       <Layout>
         <Content style={{ margin: "16px" }}>
-          {currentProject && <Project />}
+          <Project />
         </Content>
         {renderFooter(classes)}
       </Layout>
