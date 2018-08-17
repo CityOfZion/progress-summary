@@ -7,10 +7,10 @@ export default {
     marginLeft: "200px"
   },
   logo: {
-    padding: "16px"
+    padding: "24px"
   },
   logoImg: {
-    width: "168px"
+    width: "152px"
   },
   sider: {
     background: "#fff",

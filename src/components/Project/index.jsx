@@ -12,17 +12,17 @@ import fetchCommits from "../../networking/fetchCommits";
 
 const styles = {
   appContent: {
-    padding: "24px",
+    padding: "0",
     background: "#fff",
     height: "824px"
   },
   repoPane: {
-    height: "720px"
+    height: "824px"
   }
 };
 
 const ELLIPSIS = "...";
-const trimRepoName = repo => repo.substring(0, 15) + ELLIPSIS;
+const trimRepoName = repo => repo.substring(0, 12) + ELLIPSIS;
 const checkRepoName = repo => (repo.length <= 15 ? repo : trimRepoName(repo));
 
 class Project extends React.Component {
@@ -49,13 +49,16 @@ class Project extends React.Component {
   render() {
     const { classes, store } = this.props;
     const isLoading = store.loading.get();
-    const project = store.project.get();
     const repos = Object.keys(store.repos.get());
     return (
       <ConditionalSpinner isLoading={isLoading}>
         <div className={classes.appContent}>
-          <h1 className={classes.title}>{project}</h1>
-          <Tabs className={classes.repoPane} tabPosition="left" size="small">
+          <Tabs
+            className={classes.repoPane}
+            tabPosition="left"
+            size="small"
+            onChange={index => store.repo.set(repos[index])}
+          >
             {repos.map((repo, index) => (
               <Tabs.TabPane tab={checkRepoName(repo)} key={index.toString()}>
                 <Repo repo={repo} />

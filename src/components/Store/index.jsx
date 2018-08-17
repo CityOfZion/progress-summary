@@ -30,6 +30,11 @@ class StoreProvider extends React.Component {
         get: () => this.state.get("repos"),
         set: value => this.state.set("repos", value),
         value: {}
+      },
+      repo: {
+        get: () => this.state.get("repo"),
+        set: value => this.state.set("repo", value),
+        value: undefined
       }
     };
   }

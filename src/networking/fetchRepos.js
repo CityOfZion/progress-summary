@@ -23,10 +23,13 @@ const fetchRepos = project =>
 export default async store => {
   const project = store.project.get();
   store.repos.set({});
+  store.repo.set(undefined);
   store.loading.set({
     project,
     fetch: "repo"
   });
   const { data } = await fetchRepos(project);
-  store.repos.set(processRepos(data));
+  const repos = processRepos(data);
+  store.repos.set(repos);
+  store.repo.set(Object.keys(repos)[0]);
 };

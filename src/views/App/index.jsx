@@ -2,7 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Breadcrumb } from "antd";
 import Project from "../../components/Project";
 import { injectStore } from "../../components/Store";
 
@@ -54,11 +54,17 @@ renderSider.propTypes = {
 };
 
 const App = ({ classes, store }) => {
+  const project = store.project.get();
+  const repo = store.repo.get();
   return (
     <Layout className={classes.layout}>
       {renderSider({ classes, store })}
       <Layout>
-        <Content style={{ margin: "16px" }}>
+        <Breadcrumb style={{ margin: "16px" }}>
+          <Breadcrumb.Item>{project}</Breadcrumb.Item>
+          <Breadcrumb.Item>{repo}</Breadcrumb.Item>
+        </Breadcrumb>
+        <Content style={{ margin: "0 16px" }}>
           <Project />
         </Content>
         {renderFooter(classes)}
