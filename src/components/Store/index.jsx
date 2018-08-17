@@ -17,7 +17,7 @@ class StoreProvider extends React.Component {
         get: () => this.state.get("loading"),
         set: value => this.state.set("loading", value),
         value: {
-          currentProject: "neo-project",
+          project: "neo-project",
           fetch: "repo"
         }
       },

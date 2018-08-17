@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Summary tool for neo-project, neo-ngd, CityOfZion, NewEconoLab and NeoResearch",
   "scripts": {
-    "build": "",
+    "build": "parcel build src/index.html --no-cache --public-url /progress-summary",
     "precommit": "yarn lint",
     "lint": "eslint 'src/**/*.js*'",
     "start": "parcel src/index.html",
@@ -31,6 +31,7 @@
   "homepage": "https://github.com/be-neo/progress-summary#readme",
   "dependencies": {
     "antd": "3.8.1",
+    "axios": "^0.18.0",
     "babel-polyfill": "6.26.0",
     "jss": "9.8.7",
     "jss-camel-case": "6.1.0",
@@ -60,6 +61,7 @@
     "eslint-plugin-jsx-a11y": "6.1.1",
     "eslint-plugin-prettier": "2.6.2",
     "eslint-plugin-react": "7.11.1",
+    "gh-pages": "^1.2.0",
     "husky": "0.14.3",
     "jest": "23.5.0",
     "parcel-bundler": "1.9.7",

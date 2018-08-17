@@ -2,16 +2,28 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 
+import { Tabs } from "antd";
 import ConditionalSpinner from "../ConditionalSpinner";
+import Repo from "../Repo";
+
 import { injectStore } from "../Store";
+import fetchRepos from "../../networking/fetchRepos";
+import fetchCommits from "../../networking/fetchCommits";
 
 const styles = {
   appContent: {
     padding: "24px",
     background: "#fff",
-    minHeight: "360px"
+    height: "824px"
+  },
+  repoPane: {
+    height: "720px"
   }
 };
+
+const ELLIPSIS = "...";
+const trimRepoName = repo => repo.substring(0, 15) + ELLIPSIS;
+const checkRepoName = repo => (repo.length <= 15 ? repo : trimRepoName(repo));
 
 class Project extends React.Component {
   componentDidMount() {
@@ -24,19 +36,13 @@ class Project extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
-    const {
-      store: { project, loading, repos }
-    } = this.props;
+    const { store } = this.props;
     const prevProject = prevProps.store.project.value;
-    const currentProject = project.get();
 
-    if (prevProject !== currentProject) {
-      repos.set({});
-      loading.set({
-        currentProject,
-        fetch: "repo"
-      });
-      console.log(await fetch("https://api.github.com/orgs/neo-project/repos"));
+    if (prevProject !== store.project.get()) {
+      await fetchRepos(store);
+      await fetchCommits(store);
+      store.loading.set(false);
     }
   }
 
@@ -44,11 +50,18 @@ class Project extends React.Component {
     const { classes, store } = this.props;
     const isLoading = store.loading.get();
     const project = store.project.get();
-    const repos = store.repos.get();
+    const repos = Object.keys(store.repos.get());
     return (
       <ConditionalSpinner isLoading={isLoading}>
         <div className={classes.appContent}>
           <h1 className={classes.title}>{project}</h1>
+          <Tabs className={classes.repoPane} tabPosition="left" size="small">
+            {repos.map((repo, index) => (
+              <Tabs.TabPane tab={checkRepoName(repo)} key={index.toString()}>
+                <Repo repo={repo} />
+              </Tabs.TabPane>
+            ))}
+          </Tabs>
         </div>
       </ConditionalSpinner>
     );

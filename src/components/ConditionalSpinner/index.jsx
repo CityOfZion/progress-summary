@@ -6,7 +6,7 @@ import { injectStore } from "../Store";
 
 const ConditionalSpinner = ({ children, isLoading }) =>
   isLoading ? (
-    <Spin tip={`Loading ${isLoading.currentProject} ${isLoading.fetch}s`}>
+    <Spin tip={`Loading ${isLoading.fetch}s in ${isLoading.project}`}>
       {children}
     </Spin>
   ) : (
@@ -15,7 +15,7 @@ const ConditionalSpinner = ({ children, isLoading }) =>
 
 ConditionalSpinner.propTypes = {
   children: PropTypes.object.isRequired,
-  isLoading: PropTypes.object.isRequired
+  isLoading: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]).isRequired
 };
 
 export default injectStore(ConditionalSpinner);
