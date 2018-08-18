@@ -17,10 +17,11 @@ const arrayAsKeys = data => {
 
 const processRepos = repos => arrayAsKeys(repos.map(r => r.name));
 
-const fetchRepos = project =>
-  get(GITHUB_API + ORGS + SLASH + project + REPOS + ACCESS_TOKEN);
+const fetchRepos = (project, token) =>
+  get(GITHUB_API + ORGS + SLASH + project + REPOS + ACCESS_TOKEN(token));
 
 export default async store => {
+  const token = store.token.get();
   const project = store.project.get();
   store.repos.set({});
   store.repo.set(undefined);
@@ -28,7 +29,7 @@ export default async store => {
     project,
     fetch: "repo"
   });
-  const { data } = await fetchRepos(project);
+  const { data } = await fetchRepos(project, token);
   const repos = processRepos(data);
   store.repos.set(repos);
   store.repo.set(Object.keys(repos)[0]);

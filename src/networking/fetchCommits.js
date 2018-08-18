@@ -4,15 +4,15 @@ import { GITHUB_API, COMMITS, REPOS, SLASH, ACCESS_TOKEN } from "./consts";
 
 const getKeys = repos => Object.keys(repos);
 
-const fetchCommits = async (project, repo) =>
+const fetchCommits = async (project, repo, token) =>
   get(
-    GITHUB_API + REPOS + SLASH + project + SLASH + repo + COMMITS + ACCESS_TOKEN
+    GITHUB_API + REPOS + SLASH + project + SLASH + repo + COMMITS + ACCESS_TOKEN(token)
   );
 
-const delegateAsyncFetch = (project, rawRepos) => {
+const delegateAsyncFetch = (project, rawRepos, token) => {
   const repos = rawRepos;
   getKeys(repos).forEach(repo => {
-    repos[repo].commits = fetchCommits(project, repo);
+    repos[repo].commits = fetchCommits(project, repo, token);
   });
   return repos;
 };
@@ -27,12 +27,13 @@ const persistFetch = async repo => {
 };
 
 export default async store => {
+  const token = store.token.get();
   const project = store.project.get();
   store.loading.set({
     project,
     fetch: "commit"
   });
-  const repos = await delegateAsyncFetch(project, store.repos.get());
+  const repos = await delegateAsyncFetch(project, store.repos.get(), token);
   // const repoKeys = getKeys(repos);
   // await repoKeys.forEach(async repo => {
   //   await persistFetch(repos[repo]);

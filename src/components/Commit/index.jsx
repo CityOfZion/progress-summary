@@ -12,9 +12,6 @@ const styles = {
   }
 };
 
-const fetchAuthorData = ({ commit: { author } }) =>
-  `Commit by ${author.name} on ${author.date}`;
-
 const Commit = ({ classes, commit }) => {
   const committer = commit.committer || commit.commit.committer;
   return (

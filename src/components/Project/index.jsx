@@ -7,6 +7,7 @@ import ConditionalSpinner from "../ConditionalSpinner";
 import Repo from "../Repo";
 
 import { injectStore } from "../Store";
+import fetchToken from "../../networking/fetchToken";
 import fetchRepos from "../../networking/fetchRepos";
 import fetchCommits from "../../networking/fetchCommits";
 
@@ -40,6 +41,7 @@ class Project extends React.Component {
     const prevProject = prevProps.store.project.value;
 
     if (prevProject !== store.project.get()) {
+      await fetchToken(store);
       await fetchRepos(store);
       await fetchCommits(store);
       store.loading.set(false);
