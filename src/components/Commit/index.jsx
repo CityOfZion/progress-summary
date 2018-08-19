@@ -2,7 +2,8 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 
-import { List, Avatar } from "antd";
+import { Item } from "antd/lib/list";
+import Avatar from "antd/lib/avatar";
 
 import GITHUB_LOGO from "../../assets/github_logo.png";
 
@@ -15,7 +16,7 @@ const styles = {
 const Commit = ({ classes, commit }) => {
   const committer = commit.committer || commit.commit.committer;
   return (
-    <List.Item
+    <Item
       className={classes.listItem}
       // actions={[<a onClick={this.showDrawer}>View Info</a>]} // eslint:disable
       actions={[
@@ -24,14 +25,14 @@ const Commit = ({ classes, commit }) => {
         </a>
       ]}
     >
-      <List.Item.Meta
+      <Item.Meta
         avatar={<Avatar src={committer.avatar_url || GITHUB_LOGO} />}
         title={
           <a href={committer.html_url}> {committer.login || committer.name}</a>
         }
         description={commit.commit.message}
       />
-    </List.Item>
+    </Item>
   );
 }
 

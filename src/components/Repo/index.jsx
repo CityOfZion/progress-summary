@@ -2,7 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 
-import { List } from "antd";
+import List from "antd/lib/list";
 import Commit from "../Commit";
 
 import { injectStore } from "../Store";

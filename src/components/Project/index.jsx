@@ -2,7 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 
-import { Tabs } from "antd";
+import Tabs from "antd/lib/tabs";
 import ConditionalSpinner from "../ConditionalSpinner";
 import Repo from "../Repo";
 

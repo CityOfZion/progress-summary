@@ -2,7 +2,9 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 
-import { Layout, Menu, Breadcrumb } from "antd";
+import Layout from "antd/lib/layout";
+import Menu from "antd/lib/menu";
+import Breadcrumb from "antd/lib/breadcrumb";
 import Project from "../../components/Project";
 import { injectStore } from "../../components/Store";
 
