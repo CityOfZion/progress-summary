@@ -29,8 +29,10 @@ export default async store => {
     project,
     fetch: "repo"
   });
-  const { data } = await fetchRepos(project, token);
+  const { data, headers } = await fetchRepos(project, token);
   const repos = processRepos(data);
   store.repos.set(repos);
   store.repo.set(Object.keys(repos)[0]);
+  const { link = "" } = headers;
+  if (link !== "") console.log(link);
 };

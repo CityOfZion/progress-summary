@@ -10,8 +10,8 @@ import { JssProvider } from "react-jss";
 
 import "antd/dist/antd.css";
 
-import App from "./views/App";
-import { StoreProvider } from "./components/Store";
+import App from "views/App";
+import { StoreProvider } from "components/Store";
 
 const jss = createJss();
 jss.use(vendorPrefixer(), camelCase(), globalStyles());
