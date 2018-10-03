@@ -1,11 +1,14 @@
 {
-  "presets": [
-    "react",
-    "env"
-  ],
+  "presets": ["react", "env"],
   "plugins": [
     ["transform-object-rest-spread", { "useBuiltIns": true }],
     "transform-function-bind",
-    "transform-class-properties"
+    "transform-class-properties",
+    [
+      "module-resolver",
+      {
+        "root": ["./src"]
+      }
+    ]
   ]
 }

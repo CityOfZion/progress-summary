@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Summary tool for neo-project, neo-ngd, CityOfZion, NewEconoLab and NeoResearch",
   "scripts": {
-    "deploy": "yarn gh-pages -d dist",
+    "deploy": "node ghpages.js",
     "build": "rimraf dist && parcel build src/index.html --no-cache --public-url /progress-summary",
     "precommit": "yarn lint",
     "lint": "eslint 'src/**/*.js*'",
@@ -46,6 +46,7 @@
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-eslint": "8.2.6",
+    "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-function-bind": "6.22.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
