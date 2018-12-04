@@ -1,20 +1,28 @@
+// Logic
 import * as React from "react";
 
+// Presentation
 import Layout from "antd/lib/layout";
+import { sheet } from "./styles";
 
-import Sider from "./modules/Sider";
+// Components
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Modules from "./modules";
 
-import "./App.less";
+// Assets
+const styles = sheet({
+  appRoot: {
+    minH: "100vh",
+  },
+});
 
-class ProgressSummary extends React.Component {
-  render() {
-    return (
-      <Layout className="ps__layout">
-        <Sider />
-        <Layout />
-      </Layout>
-    );
-  }
-}
+const App: React.FunctionComponent = () => (
+  <Layout className={styles.appRoot}>
+    <Header />
+    <Modules />
+    <Footer />
+  </Layout>
+);
 
-export default ProgressSummary;
+export default App;

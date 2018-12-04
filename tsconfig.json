@@ -2,9 +2,10 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "strict": true,
+    "strict": false,
     "jsx": "react",
     "lib": ["es5", "es6", "dom"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "strictNullChecks": false
   }
 }

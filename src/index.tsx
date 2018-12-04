@@ -1,12 +1,16 @@
+// Logic imports
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import StoreProvider from "react-ion-store";
 
+// Components
 import App from "./App";
-import * as ionStore from "./store";
+
+// Assets
+import { store, staticKeys } from "./store";
 
 ReactDOM.render(
-  <StoreProvider {...ionStore}>
+  <StoreProvider store={store} staticKeys={staticKeys}>
     <App />
   </StoreProvider>,
   document.getElementById("root")
