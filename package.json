@@ -23,8 +23,6 @@
   },
   "homepage": "https://github.com/be-neo/progress-summary#readme",
   "dependencies": {
-    "@emotion/core": "^10.0.0-beta.13",
-    "@emotion/styled": "^10.0.0-beta.13",
     "antd": "^3.10.9",
     "axios": "0.18.0",
     "babel-polyfill": "^6.26.0",
