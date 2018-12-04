@@ -1,0 +1,13 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint-eslint-rules", "tslint-react", "tslint-config-prettier", "tslint-plugin-prettier"],
+  "jsRules": {},
+  "rules": {
+    "prettier": true,
+    "variable-name": false,
+    "function-name": false,
+    "jsx-no-lambda": false,
+    "ter-max-len": ["error", { "code": 125, "ignoreUrls": true }]
+  },
+  "rulesDirectory": []
+}
